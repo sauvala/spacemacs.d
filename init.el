@@ -38,22 +38,121 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ;; auto-completion
+
+     ;; Enable asciidoc layer for editing asciidoc content
+     ;; Useful for docs.cider.mx editing
+     asciidoc
+
+     ;; Add tool tips to show doc string of functions
+     ;; Show snippets in the auto-completion popup
+     ;; Show suggestions by most commonly used
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-sort-by-usage t)
+
+     ;; To have auto-completion on as soon as you start typing
+     ;; (auto-completion :variables auto-completion-idle-delay nil)
+
+     ;; https://develop.spacemacs.org/layers/+lang/clojure/README.html
+     (clojure :variables
+              clojure-backend 'cider
+              clojure-enable-linters 'clj-kondo
+              clojure-toplevel-inside-comment-form t
+              cider-overlays-use-font-lock t
+              cider-repl-buffer-size-limit 100)
+
+     ;; SPC a L displays key and command history in a separate buffer
+     command-log
+
+     ;; Nyan cat tells you where you are in your file
+     ;; :variables
+     ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
+     colors
+
+     ;; Tools to work with comma separate values
+     ;; Used for data science files
+     ;; https://develop.spacemacs.org/layers/+lang/csv/README.html
+     csv
+
      ;; better-defaults
      emacs-lisp
-     ;; git
+
+     ;; Include emojis into everything
+     emoji
+
+     ;; SPC g s opens Magit git client full screen (q restores previous layout)
+     ;; refine hunk 'all highlights characters changed on each line
+     (git :variables
+          git-magit-status-fullscreen t
+          magit-diff-refine-hunk 'all)
+
+     ;; SPC g h to use GitHub repositories
+     ;; SPC g g to use GitHub Gists
+     github
+
+     ;; graphviz - open-source graph declaration system
+     ;; Used to generated graphs of Clojure project dependencies
+     ;; https://develop.spacemacs.org/layers/+lang/graphviz/README.html
+     graphviz
+
      helm
+
+     html
+     javascript
+     json
+     yaml
      ;; lsp
-     ;; markdown
+     markdown
      multiple-cursors
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
-     treemacs
+     org
+
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+
+     spell-checking
+
+     ;; Use original flycheck fringe bitmaps
+     (syntax-checking :variables
+                      syntax-checking-use-original-bitmaps t)
+
+     ;; Highlight changes in buffers
+     ;; SPC g . transient state for navigating changes
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t)
+
+     ;; Visual file manager - `SPC p t'
+     ;; treemacs-no-png-images t removes file and directory icons
+     (treemacs :variables
+               treemacs-indentation 1
+               treemacs-use-filewatch-mode t
+               treemacs-use-follow-mode t)
+
+     ;; Text-based file manager with preview
+     ;; SPC a r
+     (ranger :variables
+            ranger-show-preview t
+            ranger-show-hidden t
+            ranger-cleanup-eagerly t
+            ranger-cleanup-on-disable t
+            ranger-ignored-extensions '("mkv" "flv" "iso" "mp4"))
+
+     ;; Support font ligatures (fancy symbols) in all modes
+     ;; 'prog-mode for only programming languages
+     ;; including text-mode may cause issues with org-mode and magit
+     (unicode-fonts :variables
+                    unicode-fonts-enable-ligatures t
+                    unicode-fonts-ligature-modes '(prog-mode))
+
+     ;; spacemacs-layouts layer added to set variables
+     ;; SPC TAB restricted to current layout buffers
+     ;; Kill buffers when killing layer - SPC l x
+     (spacemacs-layouts :variables
+                        spacemacs-layouts-restrict-spc-tab t
+                        persp-autokill-buffer-on-remove 'kill-weak)
+
      (osx :variables osx-option-as 'meta
                      osx-right-option-as 'none))
 
@@ -527,7 +626,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard launchctl ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(yasnippet-snippets yaml-mode xterm-color web-mode web-beautify vterm unicode-fonts ucs-utils font-utils treemacs-magit terminal-here tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-mode rainbow-identifiers pug-mode prettier-js persistent-soft orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain nodejs-repl multi-term mmm-mode markdown-toc magit-svn magit-section magit-gitflow magit-popup livid-mode skewer-mode ligature json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc impatient-mode simple-httpd htmlize helm-org-rifle helm-gitignore helm-git-grep helm-css-scss helm-company helm-cider helm-c-yasnippet haml-mode grip-mode graphviz-dot-mode gnuplot gitignore-templates gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache gh-md fuzzy forge markdown-mode ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clj-kondo evil-org evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help emojify emoji-cheat-sheet-plus emmet-mode diff-hl csv-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-emoji company command-log-mode color-identifiers-mode clojure-snippets cider-eval-sexp-fu cider sesman seq queue parseedn clojure-mode parseclj a browse-at-remote auto-yasnippet yasnippet auto-dictionary adoc-mode markup-faces ac-ispell auto-complete reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard launchctl ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
