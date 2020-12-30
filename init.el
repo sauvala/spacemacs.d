@@ -114,7 +114,8 @@ This function should only modify configuration layer settings."
             shell-default-shell 'multi-term
             multi-term-program "/usr/local/bin/fish"
             shell-default-height 30
-            shell-default-position 'bottom)
+            shell-default-position 'bottom
+            close-window-with-terminal t)
 
      spell-checking
 
