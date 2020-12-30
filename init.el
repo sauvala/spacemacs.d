@@ -65,6 +65,8 @@ This function should only modify configuration layer settings."
      ;; Displays keys and commands
      command-log
 
+     multiple-cursors
+
      ;; Nyan cat tells you where you are in your file
      ;; :variables
      ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
