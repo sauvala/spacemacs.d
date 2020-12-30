@@ -170,7 +170,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(sublimity)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -440,7 +440,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
@@ -621,6 +621,29 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Sublimity smooth scrolling, distraction free mode and minimap
+  (require 'sublimity)
+
+  ;; different "modes"
+  ;; (require 'sublimity-scroll)
+  ;; (require 'sublimity-attractive)
+  ;; (setq sublimity-attractive-centering-width 110)
+  ;; (sublimity-attractive-hide-bars)
+  ;; (sublimity-attractive-hide-vertical-border)
+  ;; (sublimity-attractive-hide-fringes)
+  ;; (sublimity-attractive-hide-modelines)
+  (require 'sublimity-map)
+  (setq sublimity-map-size 20)
+  (setq sublimity-map-fraction 0.3)
+  (setq sublimity-map-text-scale -7)
+  (add-hook 'sublimity-map-setup-hook
+            (lambda ()
+              (setq buffer-face-mode-face '(:family "Monospace"))
+              (buffer-face-mode)))
+  (sublimity-map-set-delay 2)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Shell - Fish
@@ -917,7 +940,7 @@ This function is called at the very end of Spacemacs initialization."
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(visual-fill-column treemacs smartparens dash doom-modeline shrink-path doom-themes yasnippet-snippets yaml-mode xterm-color web-mode web-beautify vterm unicode-fonts ucs-utils font-utils treemacs-magit terminal-here tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-mode rainbow-identifiers pug-mode prettier-js persistent-soft orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain nodejs-repl multi-term mmm-mode markdown-toc magit-svn magit-section magit-gitflow magit-popup livid-mode skewer-mode ligature json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc impatient-mode simple-httpd htmlize helm-org-rifle helm-gitignore helm-git-grep helm-css-scss helm-company helm-cider helm-c-yasnippet haml-mode grip-mode graphviz-dot-mode gnuplot gitignore-templates gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache gh-md fuzzy forge markdown-mode ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clj-kondo evil-org evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help emojify emoji-cheat-sheet-plus emmet-mode diff-hl csv-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-emoji company command-log-mode color-identifiers-mode clojure-snippets cider-eval-sexp-fu cider sesman seq queue parseedn clojure-mode parseclj a browse-at-remote auto-yasnippet yasnippet auto-dictionary adoc-mode markup-faces ac-ispell auto-complete reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard launchctl ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(sublimity visual-fill-column treemacs smartparens dash doom-modeline shrink-path doom-themes yasnippet-snippets yaml-mode xterm-color web-mode web-beautify vterm unicode-fonts ucs-utils font-utils treemacs-magit terminal-here tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-mode rainbow-identifiers pug-mode prettier-js persistent-soft orgit org-rich-yank org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain nodejs-repl multi-term mmm-mode markdown-toc magit-svn magit-section magit-gitflow magit-popup livid-mode skewer-mode ligature json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc impatient-mode simple-httpd htmlize helm-org-rifle helm-gitignore helm-git-grep helm-css-scss helm-company helm-cider helm-c-yasnippet haml-mode grip-mode graphviz-dot-mode gnuplot gitignore-templates gitignore-mode github-search github-clone gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gist gh marshal logito pcache gh-md fuzzy forge markdown-mode ghub closql emacsql-sqlite emacsql treepy flyspell-correct-helm flyspell-correct flycheck-pos-tip flycheck-clj-kondo evil-org evil-magit magit git-commit with-editor transient eshell-z eshell-prompt-extras esh-help emojify emoji-cheat-sheet-plus emmet-mode diff-hl csv-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-emoji company command-log-mode color-identifiers-mode clojure-snippets cider-eval-sexp-fu cider sesman seq queue parseedn clojure-mode parseclj a browse-at-remote auto-yasnippet yasnippet auto-dictionary adoc-mode markup-faces ac-ispell auto-complete reveal-in-osx-finder osx-trash osx-dictionary osx-clipboard launchctl ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
