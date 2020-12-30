@@ -109,6 +109,8 @@ This function should only modify configuration layer settings."
      org
 
      (shell :variables
+            shell-default-shell 'multi-term
+            multi-term-program "/usr/local/bin/fish"
             shell-default-height 30
             shell-default-position 'bottom)
 
@@ -613,7 +615,12 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Shell - Fish
+  (add-hook 'term-mode-hook 'spacemacs/toggle-truncate-lines-on)
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Keeping Helm history clean
   (setq history-delete-duplicates t)
   (setq extended-command-history
