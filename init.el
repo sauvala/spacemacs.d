@@ -62,7 +62,7 @@ This function should only modify configuration layer settings."
               cider-overlays-use-font-lock t
               cider-repl-buffer-size-limit 100)
 
-     ;; SPC a L displays key and command history in a separate buffer
+     ;; Displays keys and commands
      command-log
 
      ;; Nyan cat tells you where you are in your file
