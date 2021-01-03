@@ -67,11 +67,6 @@ This function should only modify configuration layer settings."
 
      multiple-cursors
 
-     ;; Nyan cat tells you where you are in your file
-     ;; :variables
-     ;; colors-enable-nyan-cat-progress-bar (display-graphic-p)
-     ;; (colors :variables
-     ;;         colors-enable-nyan-cat-progress-bar (display-graphic-p))
      colors
      ;; Tools to work with comma separate values
      ;; Used for data science files
